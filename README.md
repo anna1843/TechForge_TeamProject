@@ -27,4 +27,3 @@
 
 ### ⚙️ DB 구성
 ![DB](https://github.com/anna1843/TechForge/assets/133622218/5d4b2626-1fb2-4da2-9040-16d827fc5511)
-# TechForge_TeamProject
