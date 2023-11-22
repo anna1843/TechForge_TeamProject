@@ -58,6 +58,7 @@
   ```
 
   > 근무/근태 리스트 보여주기 Service
+
   ```java
   public List<WorkTimeDto> getWorkTimeWorkList(Long memberId, String workType) {
         List<WorkTimeDto> workTimeDtoList = new ArrayList<>(); // 반환값이 list이므로 list생성
@@ -101,6 +102,7 @@
     ![월급정산](월급정산.png)
     
     > 월급정산 Controller
+    
     ```java
     @PostMapping("/{memberId}")
     @ResponseBody
@@ -116,7 +118,9 @@
         return map;
     }
     ```
+    
      > 월급정산 Service
+     
     ```java
     public Integer postPayList(Long memberId, String workMonth) {
         //이미 정산 내역이 있다면
@@ -153,8 +157,9 @@
     ![월급목록](월급내역.png)
 
     > 월급목록 Controller
+    
     ```java
-    ... 월별
+    ... 월별 ...
     @PostMapping("/{memberId}")
     @ResponseBody
     public Map<String,Object> getMemberPayMontly(
@@ -168,7 +173,7 @@
         map.put("result", result);
         return map;
     }
-    ... 년도별
+    ... 년도별 ...
     @GetMapping("/yearList/{memberId}")
     @ResponseBody
     public List<PayDto> getMemberPayYearly(
@@ -183,8 +188,9 @@
     ```
     
     > 월급목록 Service
+    
     ```java
-    ... 월별
+    ... 월별 ...
     public List<PayDto> getPayMonthlyList(Long memberId) {
         List<PayDto> payDtoList = new ArrayList<>();
         List<PayEntity> payEntityList  = payRepository.findBymemberEntity_Id(memberId);
@@ -196,7 +202,7 @@
         }
         return payDtoList;
     }
-    ... 년도별
+    ... 년도별 ...
     public List<PayDto> getPayYearList(Long memberId, String workYear) {
         List<PayDto> payDtoList = new ArrayList<PayDto>();
         List<PayEntity> payEntityList = payRepository.findByPayYear(memberId, workYear);
