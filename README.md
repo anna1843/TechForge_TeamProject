@@ -97,11 +97,12 @@
 
 <details>
   <summary>💵월급(급여)정산 및 리스트</summary>
+  > 월급정산
   
   ![월급정산](월급정산.png)
+
+  > Controller
   
-  > 월급정산 Controller
-    
   ```java
   @PostMapping("/{memberId}")
   @ResponseBody
@@ -117,8 +118,8 @@
       return map;
   }
   ```
-    
-  > 월급정산 Service
+
+  > Service
      
   ```java
     public Integer postPayList(Long memberId, String workMonth) {
@@ -151,12 +152,12 @@
 
     }
     ```
-    
     ![월급목록](월급내역.png)
 
     > 월급목록 Controller
     
     ```java
+  
     ... 월별 ...
     @PostMapping("/{memberId}")
     @ResponseBody
@@ -171,6 +172,7 @@
         map.put("result", result);
         return map;
     }
+
     ... 년도별 ...
     @GetMapping("/yearList/{memberId}")
     @ResponseBody
@@ -201,6 +203,7 @@
         }
         return payDtoList;
     }
+
     ... 년도별 ...
     public List<PayDto> getPayYearList(Long memberId, String workYear) {
         List<PayDto> payDtoList = new ArrayList<PayDto>();
@@ -212,7 +215,6 @@
     }
     ```
 
-  </ul>
 </details>
 
 <details>
