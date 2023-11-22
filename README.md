@@ -21,7 +21,7 @@
   <summary>근무/근태</summary>
   <ul>
     <li>근무/근태 리스트</li>
-    
+    <img width="309" alt="image" src="https://github.com/anna1843/TechForge_TeamProject/assets/133622218/b53ad4de-9273-4bd6-88db-61ec90ce86f7">
   </ul>
 </details>
 
