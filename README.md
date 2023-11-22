@@ -16,7 +16,6 @@
 
 ### 🏃‍♀️ 맴버 구성
 #### 김예진(팀장) : 근무/근태(R), 급여(C,R), BaseLayout디자인, 모달디자인, PPT, 영화 API
-
 <details>
   <summary>근무/근태</summary>
   <ul>
