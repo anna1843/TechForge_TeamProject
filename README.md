@@ -97,6 +97,7 @@
 
 <details>
   <summary>💵월급(급여)정산 및 리스트</summary>
+  
   > 월급정산
   
   ![월급정산](월급정산.png)
@@ -122,37 +123,39 @@
   > Service
      
   ```java
-    public Integer postPayList(Long memberId, String workMonth) {
-      //이미 정산 내역이 있다면
-      List<PayEntity> payEntityList = payRepository.findByPayMonth(memberId,workMonth);
-        if(payEntityList.size() != 0){
-          return 0;
-      }
-      PayEntity payEntity = new PayEntity();
-      MemberEntity memberEntity = new MemberEntity();
-      List<WorkTimeEntity> workTimeEntityList = workTimeRepository.findByWorkTimeMonth(memberId, workMonth);
-        Integer sum = 0;
-        for(WorkTimeEntity workTimeEntity : workTimeEntityList){
-            sum += workTimeEntity.getTotal(); // total 계산
-        }
-        Integer pay = (sum / 60) * 10000; // 월급 계산
-        memberEntity.setId(memberId); // memberId가져오기
-        payEntity.setMonthly(workMonth); // 월급 구분
-        payEntity.setPrice(pay); // 월급 저장
-        payEntity.setIsPay(1); // 월급 지급 여부 설정 1
-        payEntity.setIs_display(1); //
-        payEntity.setMemberEntity(memberEntity); // member정보 저장
-        payEntity.setPayDay(LocalDate.now()); // 월급 기록 당일 저장
-        Optional<Long> payId = Optional.ofNullable(payRepository.save(payEntity).getId());
-        //값이 존재
-        if (payId.isPresent()) {
-            return 1;
-        }
+  public Integer postPayList(Long memberId, String workMonth) {
+    //이미 정산 내역이 있다면
+    List<PayEntity> payEntityList = payRepository.findByPayMonth(memberId,workMonth);
+      if(payEntityList.size() != 0){
         return 0;
-
+      }
+    PayEntity payEntity = new PayEntity();
+    MemberEntity memberEntity = new MemberEntity();
+    List<WorkTimeEntity> workTimeEntityList = workTimeRepository.findByWorkTimeMonth(memberId, workMonth);
+      Integer sum = 0;
+      for(WorkTimeEntity workTimeEntity : workTimeEntityList){
+        sum += workTimeEntity.getTotal(); // total 계산
+      }
+      Integer pay = (sum / 60) * 10000; // 월급 계산
+      memberEntity.setId(memberId); // memberId가져오기
+      payEntity.setMonthly(workMonth); // 월급 구분
+      payEntity.setPrice(pay); // 월급 저장
+      payEntity.setIsPay(1); // 월급 지급 여부 설정 1
+      payEntity.setIs_display(1); //
+      payEntity.setMemberEntity(memberEntity); // member정보 저장
+      payEntity.setPayDay(LocalDate.now()); // 월급 기록 당일 저장
+      Optional<Long> payId = Optional.ofNullable(payRepository.save(payEntity).getId());
+      //값이 존재
+      if (payId.isPresent()) {
+        return 1;
+      }
+      return 0;
     }
     ```
-    ![월급목록](월급내역.png)
+
+    > 월급목록
+
+    ![월급정산](월급내역.png)
 
     > 월급목록 Controller
     
