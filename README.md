@@ -16,6 +16,7 @@
 
 ### 🏃‍♀️ 맴버 구성
 #### 김예진(팀장) : 근무/근태(R), 급여(C,R), BaseLayout디자인, 모달디자인, PPT, 영화 API
+
 <details>
   <summary>근무/근태</summary>
   <ul>
@@ -23,6 +24,7 @@
     
   </ul>
 </details>
+
 <details>
   <summary>💵월급(급여)정산 및 리스트</summary>
   <ul>
@@ -32,6 +34,7 @@
     <img width="636" alt="image" src="https://github.com/anna1843/TechForge_TeamProject/assets/133622218/e4faf287-3c69-4b8e-89b1-8b850dafe6a8">
   </ul>
 </details>
+
 <details>
   <summary>레이아웃 디자인</summary>
   <ul>
