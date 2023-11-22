@@ -97,40 +97,38 @@
 
 <details>
   <summary>💵월급(급여)정산 및 리스트</summary>
-  <ul>
-    <li>월급 정산하기</li>
-    ![월급정산](월급정산.png)
+  ![월급정산](월급정산.png)
+  
+  > 월급정산 Controller
     
-    > 월급정산 Controller
-    
-    ```java
-    @PostMapping("/{memberId}")
-    @ResponseBody
-    public Map<String,Object> getMemberPayMontly(
-            @PathVariable("memberId") Long memberId,
-            @RequestParam(value = "workMonth", required = false) String workMonth){
+  ```java
+  @PostMapping("/{memberId}")
+  @ResponseBody
+  public Map<String,Object> getMemberPayMontly(
+    @PathVariable("memberId") Long memberId,
+    @RequestParam(value = "workMonth", required = false) String workMonth){
 
-        // 달에 해당하는 근무기록 가져오기
-        Integer result = payService.postPayList(memberId, workMonth);
+      // 달에 해당하는 근무기록 가져오기
+      Integer result = payService.postPayList(memberId, workMonth);
 
-        Map<String,Object> map = new HashMap<String,Object>();
-        map.put("result", result);
-        return map;
-    }
-    ```
+      Map<String,Object> map = new HashMap<String,Object>();
+      map.put("result", result);
+      return map;
+  }
+  ```
     
-     > 월급정산 Service
+  > 월급정산 Service
      
-    ```java
+  ```java
     public Integer postPayList(Long memberId, String workMonth) {
-        //이미 정산 내역이 있다면
-        List<PayEntity> payEntityList = payRepository.findByPayMonth(memberId,workMonth);
+      //이미 정산 내역이 있다면
+      List<PayEntity> payEntityList = payRepository.findByPayMonth(memberId,workMonth);
         if(payEntityList.size() != 0){
-            return 0;
-        }
-        PayEntity payEntity = new PayEntity();
-        MemberEntity memberEntity = new MemberEntity();
-        List<WorkTimeEntity> workTimeEntityList = workTimeRepository.findByWorkTimeMonth(memberId, workMonth);
+          return 0;
+      }
+      PayEntity payEntity = new PayEntity();
+      MemberEntity memberEntity = new MemberEntity();
+      List<WorkTimeEntity> workTimeEntityList = workTimeRepository.findByWorkTimeMonth(memberId, workMonth);
         Integer sum = 0;
         for(WorkTimeEntity workTimeEntity : workTimeEntityList){
             sum += workTimeEntity.getTotal(); // total 계산
@@ -153,7 +151,6 @@
     }
     ```
     
-    <li>월급 목록보기</li>
     ![월급목록](월급내역.png)
 
     > 월급목록 Controller
