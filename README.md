@@ -37,11 +37,23 @@
 #### 김예진(팀장) : 근무/근태(R), 급여(C,R), BaseLayout디자인, 모달디자인, PPT, 영화 API
 <details>
   <summary>근무/근태</summary>
-  <ul>
-    <li>근무/근태 리스트</li>
-    <img width="309" alt="image" src="https://github.com/anna1843/TechForge_TeamProject/assets/133622218/b53ad4de-9273-4bd6-88db-61ec90ce86f7">
-    ![근무/근태 리스트](./image/busan.jpg)
-  </ul>
+  > 근무/근태 리스트 보여주기 Controller
+  ```java
+     @GetMapping("/{memberId}/list")
+    @ResponseBody
+    public Map<String, Object> getWorkTimeWorklist(
+            @PathVariable("memberId") Long memberId,
+            @RequestParam(value = "workType", required = false) String workType) {
+        // json 형태로 front에 넘기기
+        Map<String, Object> map = new HashMap<>();
+
+        // 근무기록 list로 가져오기(반환)
+        List<WorkTimeDto> workTimeList = workTimeService.getWorkTimeWorkList(memberId,workType);
+
+        map.put("worklist", workTimeList);
+        return map;
+    }
+  ```
 </details>
 
 <details>
@@ -49,10 +61,10 @@
   <ul>
     <li>월급 정산하기</li>
     <img width="690" alt="image" src="https://github.com/anna1843/TechForge_TeamProject/assets/133622218/d82ad0de-f54e-4d50-8d29-3273637b9f6e">
-    ![월급정산](./image/busan.jpg)
+    ![월급정산](./월급정산.png)
     <li>월급 목록보기</li>
     <img width="636" alt="image" src="https://github.com/anna1843/TechForge_TeamProject/assets/133622218/e4faf287-3c69-4b8e-89b1-8b850dafe6a8">
-    ![월급목록](./image/busan.jpg)
+    ![월급목록](./월급내역.png)
   </ul>
 </details>
 
