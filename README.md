@@ -34,9 +34,10 @@
 ![DB구성](./image/busan.jpg)
 
 ## 🏃‍♀️ 맴버 구성
-#### 김예진(팀장) : 근무/근태(R), 급여(C,R), BaseLayout디자인, 모달디자인, PPT, 영화 API
+### 김예진(팀장) : 근무/근태(R), 급여(C,R), BaseLayout디자인, 모달디자인, PPT, 영화 API
 <details>
   <summary>근무/근태</summary>
+  
   > 근무/근태 리스트 보여주기 Controller
   
   ```java
@@ -97,11 +98,115 @@
   <summary>💵월급(급여)정산 및 리스트</summary>
   <ul>
     <li>월급 정산하기</li>
-    <img width="690" alt="image" src="https://github.com/anna1843/TechForge_TeamProject/assets/133622218/d82ad0de-f54e-4d50-8d29-3273637b9f6e">
     ![월급정산](월급정산.png)
+    
+    > 월급정산 Controller
+    ```java
+    @PostMapping("/{memberId}")
+    @ResponseBody
+    public Map<String,Object> getMemberPayMontly(
+            @PathVariable("memberId") Long memberId,
+            @RequestParam(value = "workMonth", required = false) String workMonth){
+
+        // 달에 해당하는 근무기록 가져오기
+        Integer result = payService.postPayList(memberId, workMonth);
+
+        Map<String,Object> map = new HashMap<String,Object>();
+        map.put("result", result);
+        return map;
+    }
+    ```
+     > 월급정산 Service
+    ```java
+    public Integer postPayList(Long memberId, String workMonth) {
+        //이미 정산 내역이 있다면
+        List<PayEntity> payEntityList = payRepository.findByPayMonth(memberId,workMonth);
+        if(payEntityList.size() != 0){
+            return 0;
+        }
+        PayEntity payEntity = new PayEntity();
+        MemberEntity memberEntity = new MemberEntity();
+        List<WorkTimeEntity> workTimeEntityList = workTimeRepository.findByWorkTimeMonth(memberId, workMonth);
+        Integer sum = 0;
+        for(WorkTimeEntity workTimeEntity : workTimeEntityList){
+            sum += workTimeEntity.getTotal(); // total 계산
+        }
+        Integer pay = (sum / 60) * 10000; // 월급 계산
+        memberEntity.setId(memberId); // memberId가져오기
+        payEntity.setMonthly(workMonth); // 월급 구분
+        payEntity.setPrice(pay); // 월급 저장
+        payEntity.setIsPay(1); // 월급 지급 여부 설정 1
+        payEntity.setIs_display(1); //
+        payEntity.setMemberEntity(memberEntity); // member정보 저장
+        payEntity.setPayDay(LocalDate.now()); // 월급 기록 당일 저장
+        Optional<Long> payId = Optional.ofNullable(payRepository.save(payEntity).getId());
+        //값이 존재
+        if (payId.isPresent()) {
+            return 1;
+        }
+        return 0;
+
+    }
+    ```
+    
     <li>월급 목록보기</li>
-    <img width="636" alt="image" src="https://github.com/anna1843/TechForge_TeamProject/assets/133622218/e4faf287-3c69-4b8e-89b1-8b850dafe6a8">
     ![월급목록](월급내역.png)
+
+    > 월급목록 Controller
+    ```java
+    ... 월별
+    @PostMapping("/{memberId}")
+    @ResponseBody
+    public Map<String,Object> getMemberPayMontly(
+            @PathVariable("memberId") Long memberId,
+            @RequestParam(value = "workMonth", required = false) String workMonth){
+
+        // 달에 해당하는 근무기록 가져오기
+        Integer result = payService.postPayList(memberId, workMonth);
+
+        Map<String,Object> map = new HashMap<String,Object>();
+        map.put("result", result);
+        return map;
+    }
+    ... 년도별
+    @GetMapping("/yearList/{memberId}")
+    @ResponseBody
+    public List<PayDto> getMemberPayYearly(
+            @PathVariable("memberId") Long memberId,
+            @RequestParam(value = "workYear", required = false) String workYear){
+
+        // 년에 해당하는 근무기록 가져오기
+        List<PayDto> result = payService.getPayYearList(memberId, workYear);
+
+        return result;
+    }
+    ```
+    
+    > 월급목록 Service
+    ```java
+    ... 월별
+    public List<PayDto> getPayMonthlyList(Long memberId) {
+        List<PayDto> payDtoList = new ArrayList<>();
+        List<PayEntity> payEntityList  = payRepository.findBymemberEntity_Id(memberId);
+        if(!payEntityList.isEmpty()){
+            for(PayEntity payEntity : payEntityList){
+                PayDto payDto = PayDto.toDto(payEntity);
+                payDtoList.add(payDto);
+            }
+        }
+        return payDtoList;
+    }
+    ... 년도별
+    public List<PayDto> getPayYearList(Long memberId, String workYear) {
+        List<PayDto> payDtoList = new ArrayList<PayDto>();
+        List<PayEntity> payEntityList = payRepository.findByPayYear(memberId, workYear);
+        for (PayEntity payEntity: payEntityList) {
+            payDtoList.add( PayDto.toDto(payEntity));
+        }
+        return payDtoList;
+    }
+    ```
+
   </ul>
 </details>
 
@@ -109,7 +214,6 @@
   <summary>레이아웃 디자인</summary>
   <ul>
     <li>레이아웃 디자인</li>
-    <img width="620" alt="스크린샷 2023-11-22 오전 11 38 34" src="https://github.com/anna1843/TechForge_TeamProject/assets/133622218/75d52c35-6920-4a1a-9eae-7ca27431ee1a">
     ![레이아웃](레이아웃.png)
   </ul>
 </details>
