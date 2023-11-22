@@ -40,7 +40,7 @@
   > 근무/근태 리스트 보여주기 Controller
   
   ```java
-     @GetMapping("/{memberId}/list")
+    @GetMapping("/{memberId}/list")
     @ResponseBody
     public Map<String, Object> getWorkTimeWorklist(
             @PathVariable("memberId") Long memberId,
@@ -55,6 +55,42 @@
         return map;
     }
   ```
+
+  > 근무/근태 리스트 보여주기 Service
+  ```java
+  public List<WorkTimeDto> getWorkTimeWorkList(Long memberId, String workType) {
+        List<WorkTimeDto> workTimeDtoList = new ArrayList<>(); // 반환값이 list이므로 list생성
+        List<WorkTimeEntity> workTimeEntityList;
+
+        if (workType == null) {
+            // 달만 선택
+            workTimeEntityList = workTimeRepository.findByWorkTimeMemberId(memberId);
+        } else {
+            workTimeEntityList = workTimeRepository.findByWorkTimeWorkType(memberId, workType);
+        }
+
+        // 달&유형 선택
+        if (!workTimeEntityList.isEmpty()) {
+            for (WorkTimeEntity workTimeEntity : workTimeEntityList) {
+                WorkTimeDto workTimeDto = WorkTimeDto.toDto(workTimeEntity);
+                if (workTimeDto.getWorkType() == WorkType.NORMAL) {
+                    workTimeDto.setTitle("근무");
+                } else if (workTimeDto.getWorkType() == WorkType.ABSENT) {
+                    workTimeDto.setTitle("결석");
+                } else if (workTimeDto.getWorkType() == WorkType.EARLY) {
+                    workTimeDto.setTitle("조퇴");
+                } else if (workTimeDto.getWorkType() == WorkType.TARDY) {
+                    workTimeDto.setTitle("지각");
+                } else if (workTimeDto.getWorkType() == WorkType.VACATION) {
+                    workTimeDto.setTitle("휴가");
+                }
+                workTimeDtoList.add(workTimeDto);
+            }
+        }
+        return workTimeDtoList;
+    }
+  ```
+
 </details>
 
 <details>
@@ -62,10 +98,10 @@
   <ul>
     <li>월급 정산하기</li>
     <img width="690" alt="image" src="https://github.com/anna1843/TechForge_TeamProject/assets/133622218/d82ad0de-f54e-4d50-8d29-3273637b9f6e">
-    ![월급정산](./월급정산.png)
+    ![월급정산](월급정산.png)
     <li>월급 목록보기</li>
     <img width="636" alt="image" src="https://github.com/anna1843/TechForge_TeamProject/assets/133622218/e4faf287-3c69-4b8e-89b1-8b850dafe6a8">
-    ![월급목록](./월급내역.png)
+    ![월급목록](월급내역.png)
   </ul>
 </details>
 
@@ -74,7 +110,7 @@
   <ul>
     <li>레이아웃 디자인</li>
     <img width="620" alt="스크린샷 2023-11-22 오전 11 38 34" src="https://github.com/anna1843/TechForge_TeamProject/assets/133622218/75d52c35-6920-4a1a-9eae-7ca27431ee1a">
-    ![레이아웃](./image/busan.jpg)
+    ![레이아웃](레이아웃.png)
   </ul>
 </details>
 
