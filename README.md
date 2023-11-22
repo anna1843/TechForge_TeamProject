@@ -98,7 +98,7 @@
 <details>
   <summary>💵월급(급여)정산 및 리스트</summary>
   
-  ![월급정산](월급정산.png)
+  ![월급정산](월급정산.png)
   
   > 월급정산 Controller
     
