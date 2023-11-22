@@ -38,6 +38,7 @@
 <details>
   <summary>근무/근태</summary>
   > 근무/근태 리스트 보여주기 Controller
+  
   ```java
      @GetMapping("/{memberId}/list")
     @ResponseBody
@@ -77,10 +78,15 @@
   </ul>
 </details>
 
+<br>
 김** : 로그인, 이메일 인증, 비밀번호 재설정, 권한별 LIST, 로그인&회원가입 디자인, 날씨 API
+<br>
 박** : 게시판(CRUD), 댓글, 파일, FUllCalendar일정추가, 웹소캣 알림 챗봇, 메인페이지디자인, PPT, 버스 API
+<br>
 방** : 회원(CRUD), 회원페이지 디자인, 날씨 API
+<br>
 안** : 결재(CRUD), 버스 API
+<br>
 이** : 근무/근태(CUD), FUllCalendar(근무,프리랜서일정), 네이버웍스 구현, CI/CD, 영화 API
 
 ## 주요기능
