@@ -20,19 +20,23 @@
   <summary>근무/근태</summary>
   <ul>
     <li>근무/근태 리스트</li>
+    
   </ul>
 </details>
 <details>
   <summary>💵월급(급여)정산 및 리스트</summary>
   <ul>
     <li>월급 정산하기</li>
+    <img width="690" alt="image" src="https://github.com/anna1843/TechForge_TeamProject/assets/133622218/d82ad0de-f54e-4d50-8d29-3273637b9f6e">
     <li>월급 목록보기</li>
+    <img width="636" alt="image" src="https://github.com/anna1843/TechForge_TeamProject/assets/133622218/e4faf287-3c69-4b8e-89b1-8b850dafe6a8">
   </ul>
 </details>
 <details>
   <summary>레이아웃 디자인</summary>
   <ul>
     <li>레이아웃 디자인</li>
+    <img width="620" alt="스크린샷 2023-11-22 오전 11 38 34" src="https://github.com/anna1843/TechForge_TeamProject/assets/133622218/75d52c35-6920-4a1a-9eae-7ca27431ee1a">
   </ul>
 </details>
 
