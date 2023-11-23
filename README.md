@@ -214,7 +214,8 @@
   <summary>레이아웃 디자인</summary>
 
   > Side Bar 디자인
-  ![레이아웃](Sidebar.png)
+
+  ![레이아웃](sidebar.png)
 
   <br>
 
@@ -236,6 +237,7 @@
   ```
 
   <br>
+  
   > SideBar CSS
   > 자식 UL에 overflow와 height값 설정
   
