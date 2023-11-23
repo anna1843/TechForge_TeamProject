@@ -30,8 +30,7 @@
 ![개발환경](./image/busan.jpg)
 
 ## ⚙️ DB 구성
-![DB](https://github.com/anna1843/TechForge/assets/133622218/5d4b2626-1fb2-4da2-9040-16d827fc5511)
-![DB구성](./image/busan.jpg)
+![DB구성](DB.png)
 
 ## 🏃‍♀️ 맴버 구성
 ### 김예진(팀장) : 근무/근태(R), 급여(C,R), BaseLayout디자인, 모달디자인, PPT, 영화 API
@@ -213,10 +212,50 @@
 
 <details>
   <summary>레이아웃 디자인</summary>
-  <ul>
-    <li>레이아웃 디자인</li>
-    ![레이아웃](레이아웃.png)
-  </ul>
+
+  > Side Bar 디자인
+  ![레이아웃](Sidebar.png)
+
+  <br>
+
+  > SideBar HTML
+  > 부모 UL과 자식 UL
+  
+  ```java
+  <div class="sideBar">
+            <div class="sideBar-sec">
+                <ul class="big">
+                    <li><a href="#">내 정보</a>
+                        <ul class="small">
+                            <th:block sec:authorize="hasAnyRole('STAFF','ADMIN')">
+                                <li>
+                                    <a th:href="@{/common/detail}">마이페이지</a>
+                                </li>
+                            </th:block>
+  ... 중략 ...
+  ```
+
+  <br>
+  > SideBar CSS
+  > 자식 UL에 overflow와 height값 설정
+  
+  ```java
+  .big{
+    width: 200px;
+    overflow: hidden;
+    margin: 50px auto;
+  }
+  .small{
+    height: 0;
+    overflow: hidden;
+    font-size: 18px;
+  }
+  .big >li:hover .small{
+    height: 200px;
+    transition-duration: 1s;
+  }
+  ```
+
 </details>
 
 <br>
