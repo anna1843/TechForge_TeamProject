@@ -26,14 +26,13 @@
 <br>
 
 ## 🛠️ 개발 환경
-<img width="846" alt="스크린샷 2023-10-30 오후 4 18 31" src="https://github.com/anna1843/TechForge/assets/133622218/1797ae7e-bdd1-4826-92fd-b91f76223c86">
-![개발환경](./image/busan.jpg)
+![개발환경](techskill.png)
 
 ## ⚙️ DB 구성
 ![DB구성](DB.png)
 
 ## 🏃‍♀️ 맴버 구성
-### 김예진(팀장) : 근무/근태(R), 급여(C,R), BaseLayout디자인, 모달디자인, PPT, 영화 API
+#### 김예진(팀장) : 근무/근태(R), 급여(C,R), BaseLayout디자인, 모달디자인, PPT, 영화 API
 <details>
   <summary>근무/근태</summary>
   
@@ -260,6 +259,15 @@
 
 </details>
 
+<details>
+  <summary>영화 상세보기 디자인</summary>
+
+  > Modal창 디자인
+
+  ![레이아웃](modal.png)
+
+</details>
+
 <br>
 김** : 로그인, 이메일 인증, 비밀번호 재설정, 권한별 LIST, 로그인&회원가입 디자인, 날씨 API
 <br>
@@ -272,3 +280,8 @@
 이** : 근무/근태(CUD), FUllCalendar(근무,프리랜서일정), 네이버웍스 구현, CI/CD, 영화 API
 
 ## 주요기능
+1. 멤버(즉, 관리자)로 가입 시 프리랜서와 회사 관리
+2. 회사 측에서 프리랜서에게 프로젝트 제안을 위한 결재 올림
+3. 프리랜서는 회사 측에서 올린 결재사항 확인 후 판단
+4. 회사와 프리랜서의 프로젝트가 진행되고 완료되면 급여 정산을 SoleManager에서 진행
+5. 급여 정산
